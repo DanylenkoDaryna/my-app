@@ -11,7 +11,7 @@ class Tabs extends React.Component {
                     <button className="tablinks" onClick=" openCity(event, 'London')">London</button>
                     <button className="tablinks" onClick="openCity(event, 'Paris')">Paris</button>
                     <button className="tablinks" onClick="openCity(event, 'Tokyo')">Tokyo</button>
-                    <button className="tablinks" onClick="openCity(event, 'Kyiv')">Kyiv</button>
+                    <button className="tablinks" onClick="openCity(event, 'Kyiv')">Kyiv not Kiev</button>
                 </div>
                 <div id="London" className="tabcontent">
                     <h3>London</h3>
