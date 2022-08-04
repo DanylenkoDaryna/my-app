@@ -2,6 +2,58 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+class Tabs extends React.Component {
+    render() {
+        return (
+            <div>
+
+                <div className="tab">
+                    <button className="tablinks" onClick=" openCity(event, 'London')">London</button>
+                    <button className="tablinks" onClick="openCity(event, 'Paris')">Paris</button>
+                    <button className="tablinks" onClick="openCity(event, 'Tokyo')">Tokyo</button>
+                    <button className="tablinks" onClick="openCity(event, 'Kyiv')">Kyiv</button>
+                    <button className="tablinks" onClick="openCity(event, 'Budapest')">Budapest</button>
+                </div>
+                <div id="London" className="tabcontent">
+                    <h3>London</h3>
+                    <p>London is the capital city of England.</p>
+                </div>
+
+                <div id="Paris" className="tabcontent">
+                    <h3>Paris</h3>
+                    <p>Paris is the capital of France.</p>
+                </div>
+
+                <div id="Tokyo" className="tabcontent">
+                    <h3>Tokyo</h3>
+                    <p>Tokyo is the capital of Japan.</p>
+                </div>
+            </div>
+        )
+    }
+}
+
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -49,11 +101,11 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            history:[{
+            history: [{
                 squares: Array(9).fill(null),
             }],
             xIsNext: true,
-            stepNumber:0,
+            stepNumber: 0,
         };
     }
 
@@ -63,7 +115,7 @@ class Game extends React.Component {
         const current = history[history.length - 1];
         const squares = current.squares.slice();
 
-        if(calculateWinner(squares) || squares[i]){
+        if (calculateWinner(squares) || squares[i]) {
             return;
         }
 
@@ -78,7 +130,7 @@ class Game extends React.Component {
         });
     }
 
-    jumpTo(step){
+    jumpTo(step) {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
@@ -86,26 +138,31 @@ class Game extends React.Component {
     }
 
     render() {
+
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
             const desc = move ?
-                "Go to move # " + move:
+                "Go to move # " + move :
                 "Go to game start";
             return (
-                <li key={move}>
-                    <button onClick={() =>
+            <li key={move}>
+                <React.Tabs>
+
+                </React.Tabs>
+                <button onClick={() =>
                     this.jumpTo(move)
-                    }>
-                        {desc}
-                    </button>
-                </li>
-            );
-            });
+                }>
+                    {desc}
+                </button>
+            </li>
+        )
+            ;
+        });
         let status;
 
-        if(winner){
+        if (winner) {
             status = "Winner is " + winner;
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
@@ -115,8 +172,8 @@ class Game extends React.Component {
             <div className="game">
                 <div className="game-board">
                     <Board
-                    squares ={current.squares}
-                    onClick={(i) => this.handleClick(i)}
+                        squares={current.squares}
+                        onClick={(i) => this.handleClick(i)}
                     />
                 </div>
                 <div className="game-info">
@@ -129,9 +186,10 @@ class Game extends React.Component {
 }
 
 // ========================================
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Game/>);
+root.render(<Tabs/>);
+export default Tabs;
+
 
 function calculateWinner(squares) {
     const lines = [
