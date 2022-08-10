@@ -14,8 +14,8 @@ class Tabs extends React.Component {
                     <button className="tablinks" onClick="openCity(event, 'Kyiv')">Kyiv not Kiev</button>
                 </div>
                 <div id="London" className="tabcontent">
-                    <h3>London</h3>
-                    <p>London is the capital city of England.</p>
+                    <h3>Adidas</h3>
+                    <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa</p>
                 </div>
 
                 <div id="Paris" className="tabcontent">
